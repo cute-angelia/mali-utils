@@ -1,3 +1,11 @@
+export const trim = (str) => str.trim();
+
+trim.start = (str) => str.trimStart();
+trim.end = (str) => str.trimEnd();
+trim.normalizeWhitespace = (str) => str.trim().replace(/\s+/g, ' ');
+
+
+
 export function randomString(len) {
   len = len || 32;
   var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/

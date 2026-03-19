@@ -3,8 +3,8 @@ import b64 from "base-64"
 export function urlToDataUrl(url) {
   return new Promise((resolve, reject) => {
     fetch(url, {
-        credentials: 'include',
-      })
+      credentials: 'include',
+    })
       .then(response => response.blob())
       .then(blob => new Promise((resolve2, reject2) => {
         const reader = new FileReader()
@@ -62,4 +62,22 @@ export function largeImg(imgUrl) {
   }
 
   return imgUrl
+}
+
+
+/**
+ * 从 img 标签的 srcset 属性中提取所有图片 URL
+ * @param {HTMLImageElement|string} element - img 元素或 srcset 字符串
+ * @returns {string[]} 图片 URL 数组
+ */
+export function getUrlsFromSrcset(element) {
+  // 获取 srcset 字符串（支持直接传入元素或字符串）
+  const srcset = typeof element === 'string' ? element : element.getAttribute('srcset');
+
+  if (!srcset) return [];
+
+  // 逻辑：按逗号分割，然后取每一项的第一部分（即 URL）
+  return srcset.split(',')
+    .map(item => item.trim().split(/\s+/)[0])
+    .filter(url => url !== "");
 }

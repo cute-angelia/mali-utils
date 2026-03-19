@@ -14,17 +14,21 @@ test:
 .PHONY: up
 up:
 	git add .
-	git commit -am "update"
+	@read -p "Commit message: " msg; \
+	msg=$${msg:-"update"}; \
+	git commit -m "$$msg"
 	git pull origin master
 	git push origin master
-	@echo "\n 代码提交..."
+	@echo "\n 代码提交发布..."
+	
 
 .PHONY: tag
 tag:
 	git pull origin master
 	git add .
-	git commit -am "${PROJECT} ${LAST_VERSION}"
-	git push origin master
-	git tag v${LAST_VERSION}
+	# 先把当前已有的改动提交了（如果工作区本来就是干净的，这行会跳过）
+	-git commit -m "chore: pre-release stash" 
+	# 此时工作区干净了，npm version 可以正常工作
+	npm version patch -m "release: ${PROJECT} v%s"
+	git push origin mamasterin
 	git push --tags
-	@echo "\n tags 发布中..."

@@ -30,5 +30,5 @@ tag:
 	-git commit -m "chore: pre-release stash" 
 	# 此时工作区干净了，npm version 可以正常工作
 	npm version patch -m "release: ${PROJECT} v%s"
-	git push origin mamasterin
+	git push origin master
 	git push --tags

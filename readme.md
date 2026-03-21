@@ -15,6 +15,9 @@ npm i mali-utils --save
 ### dev
 
 ```
+
+npm install {path-to-mali-utils}
+
 "dependencies": {
   "mali-utils": "file:../mali-utils"
 }

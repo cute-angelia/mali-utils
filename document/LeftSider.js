@@ -1,8 +1,9 @@
+
 // html 左侧添加容器
-export function HtmlAddLeftBox() {
+export function HtmlAddLeftBox(from = "") {
   let dive = document.createElement("div")
   dive.innerHTML = `
-    <div class="rollbar2z" data-extension-upload="true">
+    <div class="rollbar2z" data-from="${from}" data-extension-upload="true">
     <ul>
     </ul>
   </div>

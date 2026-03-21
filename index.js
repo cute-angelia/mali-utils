@@ -18,3 +18,4 @@ export * from './helper/request.js';
 export * from './helper/string.js';
 export * from './helper/time.js';
 
+export * from './helper/download.js';

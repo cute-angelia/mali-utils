@@ -1,12 +1,14 @@
 // 快速按键
 export function QuicKey(key, callback) {
-  // 添加事件监听器到document对象
   document.addEventListener('keydown', function (event) {
-    // console.log(event.key + '键被按下了!');
-    // 检查按下的键是否是'q'或'Q'
-    if (event.key === key || event.key === key.toUpperCase()) {
-      // 改成按钮点击
-      callback()
+    // 如果用户正在输入框里打字，则不触发快捷键
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName) || event.target.isContentEditable) {
+      return;
+    }
+
+    if (event.key.toLowerCase() === key.toLowerCase()) {
+      event.preventDefault(); // 阻止浏览器默认保存等行为
+      callback();
     }
   });
 }

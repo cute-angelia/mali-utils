@@ -20,3 +20,4 @@ export * from './helper/time.js';
 
 export * from './helper/download.js';
 export * from './helper/quickKey.js';
+export * from './helper/emoji.js';

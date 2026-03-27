@@ -81,3 +81,26 @@ export function getUrlsFromSrcset(element) {
     .map(item => item.trim().split(/\s+/)[0])
     .filter(url => url !== "");
 }
+
+export function getMaxUrlFromSrcset(element) {
+  const srcset = typeof element === 'string' ? element : element.getAttribute('srcset');
+  if (!srcset) return null;
+
+  const candidates = srcset.split(',')
+    .map(item => {
+      const [url, descriptor] = item.trim().split(/\s+/);
+      // 解析维度数值（如 "1200w" -> 1200, "2x" -> 2），缺失则默认为 1
+      const value = descriptor
+        ? parseFloat(descriptor.replace(/[wx]/i, ''))
+        : 1;
+      return { url, value };
+    })
+    .filter(item => item.url);
+
+  if (candidates.length === 0) return null;
+
+  // 按数值从大到小排序
+  candidates.sort((a, b) => b.value - a.value);
+
+  return candidates[0].url;
+}

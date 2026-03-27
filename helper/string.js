@@ -39,3 +39,12 @@ export function isJson(str) {
   } catch (error) { }
   return false
 }
+
+// 安全的文件名只保留安全字符，避免文件名包含特殊字符导致的错误
+export function safeFilename(str) {
+  return str
+    .replace(/[^\w\u4e00-\u9fa5\-. ]/g, '')  // 只保留字母/数字/中文/连字符/点/空格
+    .replace(/\s+/g, '_')                      // 空格转下划线
+    .replace(/^[.\-]+|[.\-]+$/g, '')           // 去掉首尾的点和连字符
+    .slice(0, 255)                             // 限制长度
+}

@@ -47,6 +47,8 @@ export function safeFilename(str, noEmoji = true, maxLength = 255) {
   }
   return str
     .replace(/[^\w\u4e00-\u9fa5\-. ]/g, '')  // 只保留字母/数字/中文/连字符/点/空格
+    .replaceAll(/'/g, '')    //单引号
+    .replaceAll(/"/g, '')    //双引号
     .replace(/\s+/g, '_')                      // 空格转下划线
     .replace(/^[.\-]+|[.\-]+$/g, '')           // 去掉首尾的点和连字符
     .slice(0, 255)                             // 限制长度

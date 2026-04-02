@@ -3,8 +3,7 @@
  * @param {string} selector - video 标签的选择器
  * @returns {string|string[]|null} 返回当前播放地址或所有候选地址列表
  */
-export function getVideoSrc(selector) {
-  const video = document.querySelector(selector);
+export function getVideoSrc(video) {
   if (!video) return '未找到视频元素';
 
   // 1. 优先获取当前正在播放/加载的确定地址

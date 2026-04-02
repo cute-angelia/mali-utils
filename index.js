@@ -12,6 +12,7 @@ export * from './chrome/message/content/contentHandler.js';
 
 export * from './helper/base64.js';
 export * from './helper/img.js';
+export * from './helper/video.js';
 export * from './helper/orderId.js';
 export * from './helper/promise.js';
 export * from './helper/request.js';

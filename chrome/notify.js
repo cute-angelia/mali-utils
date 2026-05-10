@@ -1,13 +1,19 @@
 import Swal from 'sweetalert2';
 
 // 基础配置混入
-const BaseToast = Swal.mixin({
-  position: 'top',
-  timer: 2500,
-  showConfirmButton: false,
-  toast: true, // 侧边栏建议开启 toast 模式，视觉上更轻量
-  width: '90%',
-});
+let _baseToast;
+const getBaseToast = () => {
+  if (!_baseToast) {
+    _baseToast = Swal.mixin({
+      position: 'top',
+      timer: 2500,
+      showConfirmButton: false,
+      toast: true,
+      width: '90%',
+    });
+  }
+  return _baseToast;
+};
 
 // sweetalert2 notifications
 export const notifySwal = {
@@ -17,7 +23,7 @@ export const notifySwal = {
    * @param {string} msg 详细内容
    */
   success(title, msg = '') {
-    return BaseToast.fire({
+    return getBaseToast().fire({
       title: title,
       text: msg,
       icon: 'success',
@@ -32,7 +38,7 @@ export const notifySwal = {
    * @param {string} msg 错误详细内容
    */
   error(title, msg = '') {
-    return BaseToast.fire({
+    return getBaseToast().fire({
       title: title,
       text: msg,
       icon: 'error',

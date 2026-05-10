@@ -9,7 +9,8 @@ const BaseToast = Swal.mixin({
   width: '90%',
 });
 
-export const notify = {
+// sweetalert2 notifications
+export const notifySwal = {
   /**
    * 成功提示
    * @param {string} title 标题
@@ -41,3 +42,27 @@ export const notify = {
     });
   }
 };
+
+// 传统的chrome通知
+export function notifyChrome(title, message, icon = '/icons/icon.png') {
+  try {
+    var isClosed = false;
+    var notificationId = "posting_" + Math.random();
+
+    chrome.notifications.create(
+      notificationId, {
+      type: "basic",
+      title: title,
+      message: message,
+      iconUrl: icon,
+    },
+      function (nId) { }
+    );
+    setTimeout(function () {
+      if (!isClosed)
+        chrome.notifications.clear(notificationId, function (wasCleared) { });
+    }, 5000);
+  } catch (e) {
+    alert(e.message);
+  }
+}
